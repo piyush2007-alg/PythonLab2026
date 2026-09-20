@@ -1,182 +1,157 @@
-# 🐍 Python Programming
+# Python Code Quality & Comment Analyzer — Phase 2
 
-Welcome to my **Python Programming Repository**!
+A command-line tool that analyzes Python source code for coding
+standards, comment/docstring quality, code complexity, naming
+conventions, and unused imports/variables — then generates a scored
+quality report (with a Best / Good / Average / Poor grade) and
+improvement suggestions.
 
-This repository contains Python programs, practice problems, and projects created while learning Python from **basic to advanced concepts**. It is useful for beginners who want to understand Python through practical coding.
+Built entirely on the Python standard library (`ast`, `re`, `os`,
+`argparse`) — no external dependencies required.
 
-## 📌 About This Repository
+---
 
-The main purpose of this repository is to:
+## What's New in Phase 2
 
-* Learn Python fundamentals
-* Practice programming problems
-* Improve problem-solving skills
-* Understand Python logic and syntax
-* Learn Object-Oriented Programming
-* Practice Data Structures and Algorithms
-* Build small Python projects
+- **Unused Imports Checker** — flags any `import` that is never
+  referenced anywhere in the file.
+- **Unused Variables Checker** — flags any local variable assigned
+  inside a function but never read afterward.
+- **Quality Grade Label** — every file (and the overall run) now gets
+  a plain-language grade, not just a raw number:
 
-## 📚 Topics Covered
+| Score Range | Grade   |
+|-------------|---------|
+| 90 – 100    | Best    |
+| 75 – 89     | Good    |
+| 50 – 74     | Average |
+| 0 – 49      | Poor    |
 
-### 🔹 Python Basics
+- **Grade Distribution Summary** — the overall report now shows how
+  many files fell into each grade bucket.
 
-* Variables and Data Types
-* Input and Output
-* Operators
-* Type Conversion
-* Comments
+---
 
-### 🔹 Conditional Statements
+## Project Structure
 
-* `if`
-* `if-else`
-* `if-elif-else`
-* Nested Conditions
-
-### 🔹 Loops
-
-* `for` Loop
-* `while` Loop
-* Nested Loops
-* `break`, `continue`, and `pass`
-
-### 🔹 Python Collections
-
-* Lists
-* Tuples
-* Sets
-* Dictionaries
-* Strings
-
-### 🔹 Functions
-
-* User-defined Functions
-* Parameters and Arguments
-* Return Values
-* Lambda Functions
-* Recursion
-
-### 🔹 Object-Oriented Programming
-
-* Classes and Objects
-* Constructors
-* Inheritance
-* Encapsulation
-* Polymorphism
-
-### 🔹 File Handling
-
-* Reading Files
-* Writing Files
-* Appending Data
-* File Operations
-
-### 🔹 Exception Handling
-
-* `try`
-* `except`
-* `else`
-* `finally`
-
-### 🔹 DSA with Python
-
-* Arrays and Lists
-* Stack
-* Queue
-* Searching
-* Sorting
-* Recursion
-* Basic Problem Solving
-
-## 📂 Repository Structure
-
-```text
-Python/
-│
-├── Basics/
-├── Conditional_Statements/
-├── Loops/
-├── Lists/
-├── Tuples/
-├── Sets/
-├── Dictionaries/
-├── Functions/
-├── OOP/
-├── File_Handling/
-├── Exception_Handling/
-├── DSA/
-├── Projects/
+```
+phase2/
+├── main.py                     # single-file CLI tool (Phase 2)
+├── sample_inputs/
+│   ├── sample_bad.py           # intentionally messy file
+│   ├── sample_good.py          # clean, well-documented file
+│   └── sample_unused.py        # triggers unused import/variable checks
 └── README.md
 ```
 
-## 💻 Requirements
+---
 
-Make sure Python is installed on your computer.
+## Requirements
 
-Check the installed version:
+- Python 3.8 or higher
+- No installation of external packages needed
 
+---
+
+## All Commands
+
+**Analyze a single file:**
 ```bash
-python --version
+python main.py sample_inputs/sample_bad.py
 ```
 
-Recommended:
-
-```text
-Python 3.x
-```
-
-## 🚀 How to Run
-
-### 1. Clone the repository
-
+**Analyze an entire directory (recursively finds all `.py` files):**
 ```bash
-git clone <your-repository-url>
+python main.py sample_inputs/
 ```
 
-### 2. Open the repository
-
+**Analyze and export a Markdown report:**
 ```bash
-cd Python
+python main.py sample_inputs/ --export report.md
 ```
 
-### 3. Run a Python program
-
+**Analyze the current directory:**
 ```bash
-python filename.py
+python main.py .
 ```
 
-## 🎯 Learning Goals
+**View CLI help:**
+```bash
+python main.py --help
+```
 
-By working through this repository, I aim to:
+**Run against your own project folder:**
+```bash
+python main.py /path/to/your/project --export my_project_report.md
+```
 
-* Build a strong foundation in Python
-* Improve logical thinking
-* Practice coding regularly
-* Understand DSA concepts
-* Write clean and readable code
-* Develop real-world Python projects
+---
 
-## 🛠️ Technologies Used
+## What Each Check Looks For
 
-* **Python 3**
-* **VS Code**
-* **Git**
-* **GitHub**
+| Analyzer | Checks |
+|---|---|
+| Style Checker | Line length > 79, trailing whitespace, tabs, semicolons, missing blank lines before def/class, missing spaces around `=` |
+| Comment Analyzer | Missing module/class/function docstrings, low comment-to-code ratio, filler comments (e.g. `# fix this`) |
+| Complexity Analyzer | Cyclomatic complexity > 10, nesting depth > 4, function length > 50 lines |
+| Naming Checker | Functions/variables not in snake_case, classes not in PascalCase, constants not in UPPER_SNAKE_CASE |
+| Unused Imports | Any `import` or `from ... import` name never referenced in the file |
+| Unused Variables | Any variable assigned inside a function but never read |
 
-## 🤝 Contributions
+---
 
-Contributions and suggestions are welcome!
+## How Scoring & Grading Work
 
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes.
-4. Commit your changes.
-5. Push the branch.
-6. Create a Pull Request.
+1. Every file starts at **100 points**.
+2. Each issue subtracts points based on severity:
+   - High = 5 points
+   - Medium = 3 points
+   - Low = 1 point
+3. The total penalty is normalized against file length, so longer
+   files aren't unfairly punished just for having more lines.
+4. The final score is mapped to a grade using the table above.
+5. The overall report averages all file scores and grades the
+   project as a whole the same way.
 
-## ⭐ Support
+---
 
-If you find this repository useful, consider giving it a **⭐ Star**.
+## Sample Output
 
-Happy Coding! 🐍💻
+```
+======================================================================
+FILE: sample_inputs/sample_bad.py
+QUALITY SCORE: 64.2/100   |   GRADE: Average
+COMMENT-TO-CODE RATIO: 0.04
+----------------------------------------------------------------------
+[Medium] Line 2     - 'myclass' does not follow PascalCase convention
+[Medium] Line 3     - Function 'DoSomething' is missing a docstring
+...
 
+######################################################################
+OVERALL SUMMARY
+######################################################################
+Files analyzed: 3
+Total issues found: 23
+Average quality score: 86.1/100   |   OVERALL GRADE: Good
+
+Grade distribution:
+  Best    : 2 file(s)
+  Average : 1 file(s)
+```
+
+---
+
+## Extending the Project (Ideas for Phase 3)
+
+- Duplicate code detection
+- Type hint coverage checking
+- Configurable rules via a `.codequalityrc` file
+- HTML report with charts
+- Git integration (analyze only changed files)
+- `--fix` flag to auto-correct trivial issues
+
+---
+
+## License
+
+MIT
