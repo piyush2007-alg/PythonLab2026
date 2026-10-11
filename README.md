@@ -1,125 +1,174 @@
 # Python Code Quality & Comment Analyzer
 
-A command-line tool for reviewing Python source files and directories. It
-checks style, documentation, complexity, naming conventions, unused imports,
-and unused local variables, then prints a scored quality report with practical
-issue details.
+An interactive **Neumorphic Web Frontend** and command-line tool for reviewing and **auto-fixing** Python source code quality, documentation, style, complexity, and naming conventions.
 
-The analyzer uses only the Python standard library, including `ast`, `argparse`,
-`os`, and `re`. No third-party packages are required.
+Scores every file from 0 to 100 with actionable feedback, function-level cyclomatic complexity breakdowns, and exportable reports. Built exclusively with the **Python Standard Library** (`ast`, `http.server`, `re`, `argparse`) — zero third-party pip dependencies required.
 
-## Features
+---
 
-- Recursively analyze a single Python file or a directory of Python files.
-- Report PEP 8-style issues such as long lines, tabs, trailing whitespace,
-  semicolons, and missing operator spacing.
-- Check module, class, and function docstrings and comment quality.
-- Measure function complexity, nesting depth, and function length.
-- Check `snake_case`, `PascalCase`, and `UPPER_SNAKE_CASE` naming conventions.
-- Find imports that are never referenced and local variables that are never used.
-- Score every file from 0 to 100 and assign a `Best`, `Good`, `Average`, or
-  `Poor` grade.
-- Export results as a Markdown report.
+## 🛠️ Automated Code Fixer
 
-## Project Structure
+The built-in Auto-Fix engine can automatically correct common PEP 8 violations in-place:
 
-```text
-Python_Code_Quality&Comment_Analyzer/
-├── main.py
-├── README.md
-├── report.md
-└── sample_inputs/
-    ├── sample_bad.py
-    ├── sample_good.py
-    └── sample_unused.py
+- **Whitespace Normalization**: Trims trailing whitespace from line ends.
+- **Indentation Normalization**: Converts tabs to 4 spaces.
+- **Semicolon Splitting**: Splits multiple statements separated by `;` onto clean individual lines.
+- **Operator Spacing**: Adds standard spacing around `=` assignment operators (`x=1` -> `x = 1`).
+- **PEP 8 Blank Lines**: Ensures 2 blank lines before top-level function and class definitions.
+- **Unused Import Removal**: AST-informed detection and removal of unused `import` statements.
+- **Filler Comments Cleanup**: Removes vague filler comments (`# fix this`, `# todo`).
+- **Standard Newline**: Ensures file ends with a trailing newline.
+
+### Run Auto-Fix via CLI:
+```bash
+# Auto-fix a single file in-place
+python main.py my_script.py --fix
+
+# Auto-fix all Python files in a directory
+python main.py ./src --fix
 ```
 
-## Requirements
+### Run Auto-Fix via Web:
+Click the **"Auto Fix"** button on the editor toolbar to view a before/after score breakdown and a checklist of all repairs applied.
 
-- Python 3.8 or newer
-- No external dependencies
+---
 
-## Usage
+## 🎨 Neumorphic Web Frontend Features
 
-Run the analyzer against one file:
+- **Soft UI / Neumorphism Aesthetics**:
+  - Tactile dual-shadow surfaces (convex cards, concave inset editor, embossed badges).
+  - Instant toggle between **Obsidian Dark Soft UI** and **Alabaster Light Soft UI**.
+  - Animated Neumorphic **Circular Score Gauge** with color-coded grade glow.
+- **Interactive Code Playground**:
+  - Inset editor with synchronized line numbers and real-time cursor tracking.
+  - Tab indentation support (4 spaces) and drag-and-drop file upload.
+  - Quick actions: **Blank File**, **Paste Clipboard**, **Clean PEP 8 Template**, **Upload .py**.
+  - **1-Click Auto-Fix** with before & after score improvement modal.
+- **Deep Code Quality Inspection**:
+  - **PEP 8 Style**: Lines > 79 chars, trailing whitespace, tabs, semicolons, operator spacing.
+  - **Docstrings & Comments**: Module, class, and function docstrings, comment-to-code ratio health bar.
+  - **Complexity Explorer**: Cyclomatic complexity, max nesting depth, and function lengths.
+  - **Naming Conventions**: `snake_case`, `PascalCase`, `UPPER_SNAKE_CASE`.
+  - **Unused Code Detection**: Unused imports and unused local variables.
+- **Actionable Issues Explorer**:
+  - Jump directly to line in editor with visual flashing gutter highlight.
+  - Filter chips by Severity (**All**, **High**, **Medium**, **Low**) and Category (**Style**, **Comments**, **Complexity**, **Naming**, **Unused**).
+  - Search bar to filter issue descriptions and line numbers.
+- **Workspace & Directory Batch Scanner**:
+  - Scan all project `.py` files or upload custom batches.
+  - Rollup summary: Total files analyzed, average score, grade distribution.
+- **Report Exporter**:
+  - 1-Click Markdown report download (`.md`).
+  - Copy formatted markdown to clipboard for GitHub PRs and code reviews.
+  - Download raw JSON analysis data.
+
+---
+
+## 🚀 Quick Start (Web Interface)
+
+Launch the web app directly (default: `http://127.0.0.1:5000/`):
 
 ```bash
-python main.py sample_inputs/sample_bad.py
+python app.py
 ```
 
-Analyze every Python file in a directory, including subdirectories:
+Or using `main.py`:
 
 ```bash
-python main.py sample_inputs/
+python main.py --web
 ```
 
-Export the results to Markdown:
+To specify a custom port:
 
 ```bash
-python main.py sample_inputs/ --export report.md
+python app.py 8080
 ```
 
-Analyze another project:
+---
+
+## 💻 Command-Line Usage (CLI)
+
+Run against a single file:
 
 ```bash
-python main.py /path/to/project --export project_report.md
+python main.py my_script.py
 ```
 
-See all command-line options:
+Analyze an entire directory recursively:
+
+```bash
+python main.py ./src
+```
+
+Auto-fix issues in place:
+
+```bash
+python main.py my_script.py --fix
+```
+
+Export report to Markdown:
+
+```bash
+python main.py ./src --export report.md
+```
+
+View CLI options:
 
 ```bash
 python main.py --help
 ```
 
-## Checks
+---
 
-| Check | Examples |
-| --- | --- |
-| Style | Lines over 79 characters, trailing whitespace, tabs, semicolons, missing blank lines, and missing spaces around `=` |
-| Comments and docstrings | Missing module, class, or function docstrings; filler comments; low comment-to-code ratio |
-| Complexity | Cyclomatic complexity above 10, nesting depth above 4, and functions longer than 50 lines |
-| Naming | Functions and variables not in `snake_case`, classes not in `PascalCase`, and constants not in `UPPER_SNAKE_CASE` |
-| Unused code | Imports that are never referenced and local variables that are assigned but never read |
+## 📂 Project Organization
 
-## Scoring
+```text
+Python_Code_Quality&Comment_Analyzer/
+├── analyzer/                 # Core analysis & repair package
+│   ├── __init__.py           # Unified exports
+│   ├── engine.py             # AST inspections & quality rules
+│   ├── fixer.py              # Automated code repair engine
+│   └── report.py             # Markdown report generators & CLI printers
+├── server/                   # Backend HTTP server package
+│   ├── __init__.py           # Server exports
+│   └── http_server.py        # Zero-dependency HTTP & REST API server
+├── web/                      # Neumorphic Web Frontend
+│   ├── index.html            # Semantic HTML5 layout
+│   ├── style.css             # Neumorphic CSS design system (Dark & Light)
+│   └── app.js                # Interactive client-side controller
+├── main.py                   # Primary CLI & Web entrypoint
+├── app.py                    # Web launcher shortcut (python app.py)
+├── analyzer.py               # Root forwarding module for backwards-compatibility
+├── server.py                 # Root forwarding module for backwards-compatibility
+├── fixer.py                  # Root forwarding module for backwards-compatibility
+├── README.md                 # Project documentation
+└── report.md                 # Sample generated report
+```
 
-Each file starts with a score of 100. Issues reduce the score according to
-severity:
+---
+
+## 📊 Scoring & Grading Scale
+
+Each file begins with 100 points. Penalties are normalized by file length:
 
 | Severity | Penalty |
-| --- | ---: |
-| High | 5 points |
-| Medium | 3 points |
-| Low | 1 point |
+| :--- | :--- |
+| **High** | 5 points |
+| **Medium** | 3 points |
+| **Low** | 1 point |
 
-The penalty is normalized by file length. Scores are graded as follows:
+### Quality Grades
 
-| Score | Grade |
-| ---: | --- |
-| 90-100 | Best |
-| 75-89 | Good |
-| 50-74 | Average |
-| 0-49 | Poor |
+| Score Range | Grade | Description |
+| :--- | :--- | :--- |
+| **90 – 100** | `Best` | Clean PEP 8 compliance, thorough documentation, low complexity |
+| **75 – 89** | `Good` | Well-structured code with minor style or comment notices |
+| **50 – 74** | `Average` | Moderate issues such as missing docstrings or high complexity |
+| **0 – 49** | `Poor` | Major architectural issues, deep nesting, or syntax errors |
 
-When multiple files are analyzed, the output also includes the average score,
-overall grade, grade distribution, and the lowest-scoring files.
+---
 
-## Sample Files and Report
+## 🛠️ Requirements
 
-The `sample_inputs` directory demonstrates the analyzer's behavior:
-
-- `sample_bad.py` contains style, documentation, naming, and import issues.
-- `sample_good.py` is a mostly clean example.
-- `sample_unused.py` demonstrates unused import and variable detection.
-
-The checked-in `report.md` is an example Markdown report generated from these
-three sample files.
-
-## Possible Improvements
-
-- Duplicate code detection
-- Type-hint coverage checks
-- Configurable rules through a project configuration file
-- HTML reports with charts
-- A mode that analyzes only changed Git files
-- Automatic fixes for simple style issues
+- **Python 3.8+**
+- **Zero external packages** (runs completely with standard library modules)
