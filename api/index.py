@@ -1,6 +1,7 @@
 """Vercel Serverless Function entrypoint for Python Code Quality Analyzer.
 
-Exposes REST API endpoints on Vercel:
+Exposes REST API endpoints and static fallback on Vercel:
+- GET  / -> Serves Neumorphic Web Frontend
 - POST /api/analyze
 - POST /api/quick-fix
 - POST /api/export-markdown
@@ -10,6 +11,7 @@ Exposes REST API endpoints on Vercel:
 
 from http.server import BaseHTTPRequestHandler
 import json
+import mimetypes
 import os
 import sys
 import urllib.parse
@@ -41,6 +43,28 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _send_file(self, file_path, content_type=None):
+        if not os.path.isfile(file_path):
+            self._send_json({"error": "File not found"}, 404)
+            return
+
+        if not content_type:
+            content_type, _ = mimetypes.guess_type(file_path)
+            if not content_type:
+                content_type = "text/html" if file_path.endswith(".html") else "text/plain"
+
+        try:
+            with open(file_path, "rb") as f:
+                content = f.read()
+            self.send_response(200)
+            self.send_header("Content-Type", f"{content_type}; charset=utf-8" if "text" in content_type else content_type)
+            self.send_header("Content-Length", str(len(content)))
+            self.send_header("Cache-Control", "public, max-age=3600")
+            self.end_headers()
+            self.wfile.write(content)
+        except Exception as e:
+            self._send_json({"error": f"Error loading file: {str(e)}"}, 500)
+
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -52,10 +76,31 @@ class handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
 
+        # 1. Root route: serve index.html
+        if path in ("/", "/index.html"):
+            root_html = os.path.join(BASE_DIR, "index.html")
+            if not os.path.isfile(root_html):
+                root_html = os.path.join(BASE_DIR, "web", "index.html")
+            self._send_file(root_html, "text/html")
+            return
+
+        # 2. Static CSS and JS assets
+        if path.startswith("/web/") or path.endswith(".css") or path.endswith(".js"):
+            clean_rel = path.lstrip("/")
+            file_candidate = os.path.join(BASE_DIR, clean_rel)
+            if not os.path.isfile(file_candidate):
+                file_candidate = os.path.join(BASE_DIR, "web", os.path.basename(path))
+            if os.path.isfile(file_candidate):
+                ctype = "text/css" if path.endswith(".css") else ("application/javascript" if path.endswith(".js") else None)
+                self._send_file(file_candidate, ctype)
+                return
+
+        # 3. Health check
         if path in ("/api/health", "/api/health/"):
             self._send_json({"status": "ok", "platform": "vercel", "engine": "AST 2.0"})
             return
 
+        # 4. Templates
         if path in ("/api/templates", "/api/templates/"):
             templates = [
                 {
@@ -74,6 +119,18 @@ class handler(BaseHTTPRequestHandler):
                 }
             ]
             self._send_json({"success": True, "templates": templates})
+            return
+
+        # Fallback for unknown GET: try serving file from root or 404
+        target = os.path.normpath(os.path.join(BASE_DIR, path.lstrip("/")))
+        if os.path.isfile(target) and target.startswith(BASE_DIR):
+            self._send_file(target)
+            return
+
+        # If still not found, serve index.html so single-page apps never show raw JSON error
+        root_html = os.path.join(BASE_DIR, "index.html")
+        if os.path.isfile(root_html):
+            self._send_file(root_html, "text/html")
             return
 
         self._send_json({"error": "Endpoint not found"}, 404)
