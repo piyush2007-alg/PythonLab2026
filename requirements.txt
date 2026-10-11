@@ -1,0 +1,3 @@
+# Python Code Quality & Comment Analyzer
+# Uses 100% Python Standard Library (ast, http.server, re, urllib, json)
+# Zero external pip packages required.
