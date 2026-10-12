@@ -124,26 +124,43 @@ python main.py --help
 
 ```text
 Python_Code_Quality&Comment_Analyzer/
-├── analyzer/                 # Core analysis & repair package
-│   ├── __init__.py           # Unified exports
-│   ├── engine.py             # AST inspections & quality rules
-│   ├── fixer.py              # Automated code repair engine
-│   └── report.py             # Markdown report generators & CLI printers
-├── server/                   # Backend HTTP server package
-│   ├── __init__.py           # Server exports
-│   └── http_server.py        # Zero-dependency HTTP & REST API server
-├── web/                      # Neumorphic Web Frontend
-│   ├── index.html            # Semantic HTML5 layout
-│   ├── style.css             # Neumorphic CSS design system (Dark & Light)
-│   └── app.js                # Interactive client-side controller
-├── main.py                   # Primary CLI & Web entrypoint
-├── app.py                    # Web launcher shortcut (python app.py)
-├── analyzer.py               # Root forwarding module for backwards-compatibility
-├── server.py                 # Root forwarding module for backwards-compatibility
-├── fixer.py                  # Root forwarding module for backwards-compatibility
-├── README.md                 # Project documentation
-└── report.md                 # Sample generated report
+├── .github/workflows/deploy.yml   # GitHub Pages automated deployment
+├── .nojekyll                      # Static file support for GitHub Pages
+├── CNAME                          # Custom domain setup
+├── analyzer/                      # Core analysis & repair package
+│   ├── __init__.py                # Package exports
+│   ├── engine.py                  # AST inspections & quality rules
+│   ├── fixer.py                   # Automated code repair engine
+│   └── report.py                  # Markdown report generators & CLI printers
+├── api/                           # Vercel Serverless Function & static router
+│   ├── __init__.py
+│   └── index.py                   # Multi-route API & static page handler
+├── server/                        # Local HTTP server package
+│   ├── __init__.py                # Server exports
+│   └── http_server.py             # Zero-dependency HTTP & REST API server
+├── web/                           # Neumorphic Web Frontend
+│   ├── index.html                 # Semantic HTML5 layout
+│   ├── style.css                  # Neumorphic CSS design system (Dark & Light)
+│   └── app.js                     # Interactive controller with client-side fallback
+├── index.html                     # Root static entrypoint for web deployments
+├── app.py                         # One-click web launcher (`python app.py`)
+├── main.py                        # Primary CLI tool (`--fix`, `--web`, `--export`)
+├── requirements.txt               # Zero external dependencies
+├── vercel.json                    # Vercel deployment configuration
+└── README.md                      # Project documentation
 ```
+
+---
+
+## 🌐 Deploy to Web (GitHub Pages & Vercel)
+
+### 1. GitHub Pages
+This repository is configured with a GitHub Actions workflow (`.github/workflows/deploy.yml`) to automatically deploy the web app on every push to `main`.
+The client-side analysis and auto-fix engine runs 100% in the browser with zero server requirement.
+
+### 2. Vercel
+Deploy seamlessly to Vercel with zero configuration:
+- `vercel.json` and `api/index.py` handle both the static frontend and the Python serverless backend endpoints (`/api/analyze`, `/api/quick-fix`, `/api/export-markdown`).
 
 ---
 
