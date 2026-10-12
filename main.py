@@ -7,31 +7,14 @@ scoring each file from 0 to 100 with an actionable quality grade.
 
 import argparse
 import sys
-import os
 
 from analyzer import (
     find_python_files,
-    read_source,
-    parse_source,
-    check_style,
-    check_comments,
-    check_complexity,
-    check_naming,
-    check_unused_imports,
-    check_unused_variables,
-    compute_score,
-    compute_grade,
     analyze_file,
-    analyze_code,
     auto_fix_file,
-    auto_fix_code,
     print_report,
     print_summary,
     export_report,
-    generate_markdown_report,
-    MAX_LINE_LENGTH,
-    SEVERITY_WEIGHTS,
-    GRADE_THRESHOLDS,
 )
 
 
