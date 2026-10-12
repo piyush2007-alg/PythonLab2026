@@ -1,5 +1,5 @@
 /**
- * PyQuality - Neumorphic Code Quality & Comment Analyzer
+ * PyQuality - Modern Code Quality & Comment Analyzer
  * Client-side Controller & Interactive Engine
  * (Zero dependency on sample_inputs)
  */
@@ -118,7 +118,7 @@ function initTheme() {
     state.theme = state.theme === "dark" ? "light" : "dark";
     elements.html.setAttribute("data-theme", state.theme);
     localStorage.setItem("pyquality_theme", state.theme);
-    showToast(`Switched to Neumorphic ${state.theme === "dark" ? "Dark" : "Light"} UI`);
+    showToast(`Switched to ${state.theme === "dark" ? "Dark" : "Light"} Mode`);
   });
 }
 

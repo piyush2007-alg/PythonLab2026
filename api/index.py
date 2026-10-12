@@ -1,7 +1,7 @@
 """Vercel Serverless Function entrypoint for Python Code Quality Analyzer.
 
 Exposes REST API endpoints and static fallback on Vercel:
-- GET  / -> Serves Neumorphic Web Frontend
+- GET  / -> Serves Modern Web Frontend
 - POST /api/analyze
 - POST /api/quick-fix
 - POST /api/export-markdown

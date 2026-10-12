@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PyQuality - Neumorphic Design System & Aesthetics
-   Soft UI Surfaces, Dual-light Shadows, Tactile Controls, and Modern Typography
+   PyQuality - Modern Design System & Aesthetics
+   Clean Developer Surfaces, Sleek Borders, Crisp Elevation, and Modern Typography
    ========================================================================== */
 
 /* --- Custom CSS Variables & Themes --- */
@@ -23,73 +23,75 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
   --radius-pill: 9999px;
 
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- Dark Mode (Obsidian Soft UI) --- */
+/* --- Dark Mode (Midnight Modern Dark) --- */
 html[data-theme="dark"] {
-  --bg-page: #151821;
-  --surface-base: #1b1f2b;
-  --surface-raised: #1f2432;
-  --surface-inset: #12141c;
+  --bg-page: #0b0f19;
+  --surface-base: #111827;
+  --surface-raised: #1f2937;
+  --surface-inset: #0d1117;
   
-  /* Neumorphic Shadow Calculations for Dark */
-  --shadow-light: rgba(255, 255, 255, 0.04);
-  --shadow-dark: rgba(5, 7, 11, 0.7);
+  /* Modern Clean Elevation & Shadows */
+  --shadow-light: transparent;
+  --shadow-dark: rgba(0, 0, 0, 0.4);
 
-  --neu-convex: -6px -6px 14px var(--shadow-light), 7px 7px 18px var(--shadow-dark);
-  --neu-convex-sm: -3px -3px 8px var(--shadow-light), 4px 4px 10px var(--shadow-dark);
-  --neu-convex-hover: -8px -8px 18px rgba(255, 255, 255, 0.06), 9px 9px 22px rgba(5, 7, 11, 0.85);
+  --neu-convex: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+  --neu-convex-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+  --neu-convex-hover: 0 8px 24px -4px rgba(0, 0, 0, 0.6);
   
-  --neu-inset: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-  --neu-inset-sm: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
-  --neu-pressed: inset 3px 3px 7px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+  --neu-inset: 0 0 0 1px var(--border-subtle);
+  --neu-inset-sm: 0 0 0 1px var(--border-subtle);
+  --neu-pressed: translateY(1px);
 
-  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.18);
 
-  --text-main: #f1f5f9;
+  --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 
-  --editor-bg: #12151e;
-  --editor-gutter-bg: #0f121a;
+  --editor-bg: #0d1117;
+  --editor-gutter-bg: #090d13;
   --editor-line-num: #475569;
 }
 
-/* --- Light Mode (Alabaster Soft UI) --- */
+/* --- Light Mode (Clean Slate Light) --- */
 html[data-theme="light"] {
-  --bg-page: #e6ecf5;
-  --surface-base: #e6ecf5;
-  --surface-raised: #e9eff8;
-  --surface-inset: #d9e1ee;
+  --bg-page: #f8fafc;
+  --surface-base: #ffffff;
+  --surface-raised: #f1f5f9;
+  --surface-inset: #f8fafc;
 
-  /* Neumorphic Shadow Calculations for Light */
-  --shadow-light: rgba(255, 255, 255, 0.95);
-  --shadow-dark: rgba(163, 177, 198, 0.65);
+  /* Modern Clean Elevation & Shadows */
+  --shadow-light: transparent;
+  --shadow-dark: rgba(15, 23, 42, 0.08);
 
-  --neu-convex: -7px -7px 16px var(--shadow-light), 8px 8px 18px var(--shadow-dark);
-  --neu-convex-sm: -4px -4px 9px var(--shadow-light), 4px 4px 10px var(--shadow-dark);
-  --neu-convex-hover: -9px -9px 20px var(--shadow-light), 10px 10px 22px var(--shadow-dark);
+  --neu-convex: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+  --neu-convex-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+  --neu-convex-hover: 0 8px 24px -4px rgba(15, 23, 42, 0.12);
 
-  --neu-inset: inset 4px 4px 9px var(--shadow-dark), inset -4px -4px 9px var(--shadow-light);
-  --neu-inset-sm: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
-  --neu-pressed: inset 4px 4px 8px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  --neu-inset: 0 0 0 1px var(--border-subtle);
+  --neu-inset-sm: 0 0 0 1px var(--border-subtle);
+  --neu-pressed: translateY(1px);
 
-  --border-subtle: rgba(255, 255, 255, 0.4);
+  --border-subtle: #e2e8f0;
+  --border-hover: #cbd5e1;
 
-  --text-main: #1e293b;
+  --text-main: #0f172a;
   --text-muted: #475569;
-  --text-dim: #64748b;
+  --text-dim: #94a3b8;
 
-  --editor-bg: #dfe6f2;
-  --editor-gutter-bg: #d4deec;
-  --editor-line-num: #64748b;
+  --editor-bg: #ffffff;
+  --editor-gutter-bg: #f8fafc;
+  --editor-line-num: #94a3b8;
 }
 
 /* --- Base Reset & Typography --- */
@@ -144,8 +146,9 @@ textarea, input {
   justify-content: space-between;
   padding: 0.85rem 1.75rem;
   background-color: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  box-shadow: var(--neu-convex);
+  box-shadow: var(--neu-convex-sm);
   margin-bottom: 1.75rem;
   position: relative;
   z-index: 10;
@@ -162,6 +165,7 @@ textarea, input {
   height: 44px;
   border-radius: var(--radius-md);
   background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
   display: flex;
   align-items: center;
@@ -201,11 +205,11 @@ textarea, input {
   font-weight: 500;
 }
 
-/* Nav Segmented Pill Controls */
+/* Nav Segmented Controls */
 .nav-segmented {
   display: flex;
-  background: var(--surface-base);
-  box-shadow: var(--neu-inset-sm);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   padding: 0.35rem;
   border-radius: var(--radius-pill);
   gap: 0.25rem;
@@ -230,6 +234,7 @@ textarea, input {
 .segment-btn.active {
   background: var(--surface-base);
   color: var(--accent-primary);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
 }
 
@@ -260,7 +265,8 @@ textarea, input {
   gap: 0.5rem;
   padding: 0.45rem 0.9rem;
   background: var(--surface-base);
-  box-shadow: var(--neu-inset-sm);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--neu-convex-sm);
   border-radius: var(--radius-pill);
   font-size: 0.75rem;
   font-weight: 600;
@@ -281,13 +287,14 @@ textarea, input {
   50% { opacity: 0.55; transform: scale(0.9); }
 }
 
-/* Neumorphic Buttons */
+/* Modern Action Buttons */
 .btn-neu {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.15rem;
   background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
   border-radius: var(--radius-md);
   font-size: 0.84rem;
@@ -297,12 +304,13 @@ textarea, input {
 }
 
 .btn-neu:hover {
-  box-shadow: var(--neu-convex-hover);
+  box-shadow: var(--neu-convex);
+  border-color: var(--border-hover);
   color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 .btn-neu:active {
-  box-shadow: var(--neu-pressed);
   transform: translateY(1px);
 }
 
@@ -312,6 +320,7 @@ textarea, input {
   gap: 0.35rem;
   padding: 0.35rem 0.75rem;
   background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
   border-radius: var(--radius-sm);
   font-size: 0.75rem;
@@ -322,11 +331,13 @@ textarea, input {
 
 .btn-neu-small:hover {
   color: var(--text-main);
+  border-color: var(--border-hover);
   box-shadow: var(--neu-convex);
+  transform: translateY(-1px);
 }
 
 .btn-neu-small:active {
-  box-shadow: var(--neu-pressed);
+  transform: translateY(1px);
 }
 
 .btn-neu-small svg {
@@ -340,7 +351,8 @@ textarea, input {
   gap: 0.55rem;
   padding: 0.65rem 1.5rem;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover));
-  box-shadow: 0 4px 14px var(--accent-primary-glow), var(--neu-convex-sm);
+  box-shadow: 0 4px 14px var(--accent-primary-glow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
   font-size: 0.88rem;
   font-weight: 700;
@@ -356,7 +368,6 @@ textarea, input {
 
 .btn-neu-primary:active {
   transform: translateY(1px);
-  filter: brightness(0.95);
 }
 
 .btn-icon {
@@ -370,6 +381,7 @@ textarea, input {
   height: 42px;
   border-radius: var(--radius-pill);
   background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
   display: flex;
   align-items: center;
@@ -379,12 +391,14 @@ textarea, input {
 }
 
 .theme-toggle-btn:hover {
-  box-shadow: var(--neu-convex-hover);
+  box-shadow: var(--neu-convex);
+  border-color: var(--border-hover);
   color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 .theme-toggle-btn:active {
-  box-shadow: var(--neu-pressed);
+  transform: translateY(1px);
 }
 
 .theme-icon-container {
@@ -421,12 +435,12 @@ html[data-theme="light"] .icon-moon {
 }
 
 /* ==========================================================================
-   Neumorphic Cards & Surface Primitives
+   Modern Cards & Surface Primitives
    ========================================================================== */
 .neu-card {
   background: var(--surface-base);
   border-radius: var(--radius-xl);
-  box-shadow: var(--neu-convex);
+  box-shadow: var(--neu-convex-sm);
   padding: 1.5rem;
   border: 1px solid var(--border-subtle);
   position: relative;
@@ -702,7 +716,7 @@ html[data-theme="light"] .icon-moon {
   }
 }
 
-/* Radial Gauge Neumorphic Dial */
+/* Radial Gauge Metric Dial */
 .gauge-wrapper {
   display: flex;
   align-items: center;
@@ -714,7 +728,8 @@ html[data-theme="light"] .icon-moon {
   height: 140px;
   border-radius: 50%;
   background: var(--surface-base);
-  box-shadow: var(--neu-convex);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--neu-convex-sm);
   position: relative;
   display: flex;
   align-items: center;
@@ -752,7 +767,7 @@ html[data-theme="light"] .icon-moon {
   height: 90px;
   border-radius: 50%;
   background: var(--surface-base);
-  box-shadow: var(--neu-inset-sm);
+  border: 1px solid var(--border-subtle);
 }
 
 .gauge-score-value {
@@ -810,6 +825,7 @@ html[data-theme="light"] .icon-moon {
 
 .stat-tile-neu {
   background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--neu-convex-sm);
   border-radius: var(--radius-md);
   padding: 0.85rem 1rem;

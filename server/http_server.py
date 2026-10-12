@@ -1,4 +1,4 @@
-"""Neumorphic Web Frontend HTTP Server for Python Code Quality Analyzer."""
+"""Modern Web Frontend HTTP Server for Python Code Quality Analyzer."""
 
 import http.server
 import json
@@ -24,7 +24,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 
 
 class QualityAnalyzerHandler(http.server.BaseHTTPRequestHandler):
-    """Custom HTTP request handler serving API and Neumorphic static frontend."""
+    """Custom HTTP request handler serving API and modern static frontend."""
 
     def log_message(self, format, *args):
         try:
@@ -307,7 +307,7 @@ def start_server(host: str = "127.0.0.1", port: int = 5000, open_browser: bool =
 
     url = f"http://{host}:{port}/"
     print("=" * 65)
-    print(" [PyQuality] Python Code Quality & Comment Analyzer (Neumorphic)")
+    print(" [PyQuality] Python Code Quality & Comment Analyzer")
     print("=" * 65)
     print(f" -> Local Web App: {url}")
     print(f" -> API endpoints: {url}api/analyze, {url}api/quick-fix")

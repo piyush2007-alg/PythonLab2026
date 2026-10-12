@@ -19,7 +19,7 @@ from analyzer import (
 
 
 def run_web(host="127.0.0.1", port=5000, open_browser=True):
-    """Start the Neumorphic Web Frontend server."""
+    """Start the Modern Web Frontend server."""
     from server import start_server
     start_server(host=host, port=port, open_browser=open_browser)
 
@@ -57,7 +57,7 @@ def main():
     parser.add_argument("path", nargs="?", default=None, help="Path to a .py file or directory")
     parser.add_argument("--export", metavar="FILE", help="Export the report to a Markdown file")
     parser.add_argument("--fix", action="store_true", help="Automatically fix PEP 8 style, semicolon statements, spacing, and unused imports in place")
-    parser.add_argument("--web", action="store_true", help="Launch the interactive Neumorphic Web Frontend")
+    parser.add_argument("--web", action="store_true", help="Launch the interactive Modern Web Frontend")
     parser.add_argument("--port", type=int, default=5000, help="Web server port (default: 5000)")
     parser.add_argument("--host", default="127.0.0.1", help="Web server host (default: 127.0.0.1)")
     parser.add_argument("--no-browser", action="store_true", help="Do not automatically open browser on web launch")

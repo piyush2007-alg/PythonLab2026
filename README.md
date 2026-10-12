@@ -1,6 +1,6 @@
 # Python Code Quality & Comment Analyzer
 
-An interactive **Neumorphic Web Frontend** and command-line tool for reviewing and **auto-fixing** Python source code quality, documentation, style, complexity, and naming conventions.
+An interactive **Modern Web Frontend** and command-line tool for reviewing and **auto-fixing** Python source code quality, documentation, style, complexity, and naming conventions.
 
 Scores every file from 0 to 100 with actionable feedback, function-level cyclomatic complexity breakdowns, and exportable reports. Built exclusively with the **Python Standard Library** (`ast`, `http.server`, `re`, `argparse`) — zero third-party pip dependencies required.
 
@@ -33,12 +33,12 @@ Click the **"Auto Fix"** button on the editor toolbar to view a before/after sco
 
 ---
 
-## 🎨 Neumorphic Web Frontend Features
+## 🎨 Modern Web Frontend Features
 
-- **Soft UI / Neumorphism Aesthetics**:
-  - Tactile dual-shadow surfaces (convex cards, concave inset editor, embossed badges).
-  - Instant toggle between **Obsidian Dark Soft UI** and **Alabaster Light Soft UI**.
-  - Animated Neumorphic **Circular Score Gauge** with color-coded grade glow.
+- **Clean Developer Aesthetics**:
+  - Crisp subtle borders, layered cards, and refined elevations.
+  - Instant toggle between **Midnight Dark** and **Clean Slate Light** modes.
+  - Animated **Circular Score Gauge** with color-coded grade glow.
 - **Interactive Code Playground**:
   - Inset editor with synchronized line numbers and real-time cursor tracking.
   - Tab indentation support (4 spaces) and drag-and-drop file upload.
@@ -138,9 +138,9 @@ Python_Code_Quality&Comment_Analyzer/
 ├── server/                        # Local HTTP server package
 │   ├── __init__.py                # Server exports
 │   └── http_server.py             # Zero-dependency HTTP & REST API server
-├── web/                           # Neumorphic Web Frontend
+├── web/                           # Modern Web Frontend
 │   ├── index.html                 # Semantic HTML5 layout
-│   ├── style.css                  # Neumorphic CSS design system (Dark & Light)
+│   ├── style.css                  # Modern CSS design system (Dark & Light)
 │   └── app.js                     # Interactive controller with client-side fallback
 ├── index.html                     # Root static entrypoint for web deployments
 ├── app.py                         # One-click web launcher (`python app.py`)
